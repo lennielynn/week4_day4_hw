@@ -1,10 +1,24 @@
+
 fib_cache = {}
 
-def fib_memo(num):
-  if num <= 1:
-    return 1
-  if num not in fib_cache:
-    fib_cache[num] = fib_memo(num - 1)  * num
-  return fib_cache[num]
+def memoize(f):
+    cache = {}
+    def wrapper(n):
+        if n not in cache:
+            cache[n] = f(n)
+            return cache[n]
+        return wrapper
 
-fib_memo(10)
+
+
+
+
+# @memoize
+def fib_memo(n):
+  if n <= 1:
+    return 1
+  if n not in fib_cache:
+    fib_cache[n] = fib_memo(n - 1)  * n
+  return fib_cache[n]
+
+print(fib_memo(10))
